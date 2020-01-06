@@ -18,10 +18,11 @@ const data = [
   { date: '2011-10-03', city: 'Austin', value: 69.4 },
 ];
 
-const width = 380;
+const pixelRatio = 2;
+const width = 375;
 const height = 240;
 
-const canvas = createCanvas(width, height);
+const canvas = createCanvas(width * pixelRatio, height * pixelRatio);
 const ctx = canvas.getContext('2d');
 
 
@@ -29,7 +30,7 @@ const chart = new F2.Chart({
   context: ctx,
   width,
   height,
-  pixelRatio: 1,
+  pixelRatio,
 });
 
 chart.source(data, {
