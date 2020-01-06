@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test page</title>
+</head>
+<body>
+  <img id="img" style="width: 360px;height: 240px;"/>
+  <script>
+    (async () => {
+      const img = document.getElementById('img');
+
+      const fetchChartImage = async (type, x, y) => {
+        const response = await fetch(`/?type=${type}&x=${x}&y=${y}`);
+        const result = await response.text();
+        img.src = `data:image/png;base64,${result}`;
+      }
+
+      fetchChartImage();
+
+      img.addEventListener('touchmove', ev => {
+        const { clientX, clientY } = ev.touches[0];
+        const { left, top } = img.getBoundingClientRect();
+        const x = clientX - left;
+        const y = clientY - top;
+        fetchChartImage('touchstart', x, y);
+      });
+      
+      img.addEventListener('mousemove', ev => {
+        const { clientX, clientY } = ev;
+        const { left, top } = img.getBoundingClientRect();
+        const x = clientX - left;
+        const y = clientY - top;
+        fetchChartImage('touchstart', x, y);
+      });
+    })();
+  </script>
+</body>
+</html>
