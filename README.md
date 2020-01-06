@@ -7,3 +7,5 @@ npm run start
 ```
 
 访问[http://localhost:8000/index.html](http://localhost:8000/index.html)就能看到效果了
+
+![](./example.gif)
