@@ -1,5 +1,5 @@
 const fs = require('fs');
-const F2 = require('./f2');
+const F2 = require('@antv/f2');
 
 const { createCanvas } = require('canvas');
 

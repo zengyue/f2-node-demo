@@ -31,14 +31,6 @@
         const y = clientY - top;
         fetchChartImage('touchstart', x, y);
       });
-      
-      img.addEventListener('mousemove', ev => {
-        const { clientX, clientY } = ev;
-        const { left, top } = img.getBoundingClientRect();
-        const x = clientX - left;
-        const y = clientY - top;
-        fetchChartImage('touchstart', x, y);
-      });
     })();
   </script>
 </body>
