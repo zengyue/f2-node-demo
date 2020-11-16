@@ -1,20 +1,17 @@
-const Canvas = require('canvas'); // 引入 node canvas
 const F2 = require('@antv/f2');
 const { JSDOM } = require('jsdom')
 const C2S = require('canvas2svg');
+const adaptContext = require('./adaptContext');
 
 var window = new JSDOM('').window;
 global.XMLSerializer = window.XMLSerializer;
 
-const canvas = Canvas.createCanvas(375, 260); // 创建 canvas 对象
-var ctx = C2S({
+var context = C2S({
   document: window.document,
   width: 375,
   height: 260,
-  ctx: canvas.getContext('2d'),
+  ctx: {},
 });
-
-
 
 const data = [
   { name: '芳华', percent: 0.4, a: '1' },
@@ -25,7 +22,8 @@ const data = [
   { name: '其他', percent: 0.02, a: '1' }
 ];
 const chart = new F2.Chart({
-  context: ctx,
+  // 需要对canvas2svg进行一层简单适配
+  context: adaptContext(context),
   width: 375,
   height: 260,
   animate: false,
@@ -60,5 +58,5 @@ chart.interval()
 chart.render();
 
 // 获取svg
-var mySerializedSVG = ctx.getSerializedSvg(true);
+var mySerializedSVG = context.getSerializedSvg(true);
 console.log(mySerializedSVG);
